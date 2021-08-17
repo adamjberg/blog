@@ -1,5 +1,8 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { postApi } from "../../apis/PostApi";
 
 type Post = {
   id: string;
@@ -8,13 +11,11 @@ type Post = {
 };
 
 export const HomePage: React.FC = () => {
-  const posts: Post[] = [
-    {
-      id: "1",
-      title: "Title",
-      body: "",
-    },
-  ];
+  const [posts, setPosts] = useState<Post[]>([])
+
+  useEffect(() => {
+    postApi.getPosts().then(setPosts)
+  }, [])
 
   return (
     <div className="home-page">

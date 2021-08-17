@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import express from "express";
 import multer from "multer";
 import dotenv from "dotenv";
+import { Post } from "./models/Post";
 
 
 run();
@@ -13,6 +14,8 @@ async function run() {
   const dbUri = process.env.DB_URI
     ? process.env.DB_URI
     : "mongodb://localhost:27017/blog";
+
+    console.log(dbUri)
 
   await mongoose.connect(dbUri, {
     useNewUrlParser: true,
@@ -54,6 +57,22 @@ async function run() {
       }
     }
   );
+
+  app.get("/api/posts", async (req, res, next) => {
+    const posts = await Post.find({});
+
+    res.json({
+      data: posts
+    })
+  })
+
+  app.post("/api/posts", async (req, res, next) => {
+    const post = await (new Post(req.body)).save();
+
+    res.json({
+      data: post
+    })
+  })
 
   app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
