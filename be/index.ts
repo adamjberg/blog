@@ -56,6 +56,14 @@ async function run() {
     }
   );
 
+  app.get("/api/posts/:id", async (req, res, next) => {
+    const posts = await Post.findById(req.params.id);
+
+    res.json({
+      data: posts
+    })
+  })
+
   app.get("/api/posts", async (req, res, next) => {
     const posts = await Post.find({});
 
