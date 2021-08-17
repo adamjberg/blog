@@ -9,4 +9,12 @@
     column-gap: 20px;
     margin: 20px;
   }
+
+  .rendered {
+    white-space: break-spaces;
+
+    img {
+      width: 100%;
+    }
+  }
 }

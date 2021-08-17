@@ -30,7 +30,11 @@ export const PostPage: React.FC = () => {
 
       if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
         const data = await handleUploadImage(e.dataTransfer.files[0]);
-        textArea.setRangeText(`![](${data.link})`);
+
+        const imageMarkdown = `![](/${data.link})`
+        const updatedBody = body.substr(0, textArea.selectionStart) + imageMarkdown + body.substr(textArea.selectionStart)
+
+        setBody(updatedBody)
 
         const nextSelection = textArea.selectionStart + 2;
         textArea.setSelectionRange(nextSelection, nextSelection);
@@ -77,7 +81,9 @@ export const PostPage: React.FC = () => {
           value={body}
           rows={40}
         ></textarea>
+        <div className="rendered">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
+        </div>
       </div>
     </div>
   );
