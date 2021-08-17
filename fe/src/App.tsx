@@ -1,8 +1,11 @@
-import React from "react";
-import { PostPage } from "./pages/PostPage/PostPage";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./App.scss";
-import { HomePage } from "./pages/HomePage/HomePage";
+import './App.scss';
+
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import { HomePage } from './pages/HomePage/HomePage';
+import { PostPage } from './pages/PostPage/PostPage';
+import { ViewPostPage } from './pages/ViewPostPage/ViewPostPage';
 
 const App: React.FC = () => {
   return (
@@ -13,6 +16,9 @@ const App: React.FC = () => {
         </Route>
         <Route path="/posts/create" exact>
           <PostPage />
+        </Route>
+        <Route path="/posts/:id" exact>
+          <ViewPostPage />
         </Route>
       </Switch>
     </Router>

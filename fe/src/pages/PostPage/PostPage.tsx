@@ -1,18 +1,11 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { createRef } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
-import docco from 'react-syntax-highlighter/dist/esm/styles/hljs/docco';
+import './PostPage.scss';
 
-import "./PostPage.scss";
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { createRef } from 'react';
 
-
-SyntaxHighlighter.registerLanguage('javascript', js);
+import { Markdown } from '../../components/Markdown';
 
 
 export const PostPage: React.FC = () => {
@@ -94,31 +87,9 @@ export const PostPage: React.FC = () => {
           rows={40}
         ></textarea>
         <div className="rendered">
-          <ReactMarkdown
-            rehypePlugins={[rehypeRaw]}
-            remarkPlugins={[remarkGfm]}
-            components={{
-              code({ node, inline, className, children, ...props }) {
-                const match = /language-(\w+)/.exec(className || "");
-                console.log(match && match[1])
-                return !inline && match ? (
-                  <SyntaxHighlighter
-                    children={String(children).replace(/\n$/, "")}
-                    style={docco}
-                    language={match[1]}
-                    PreTag="div"
-                    // {...props}
-                  />
-                ) : (
-                  <code className={className} {...props}>
-                    {children}
-                  </code>
-                );
-              },
-            }}
-          >
-            {body}
-          </ReactMarkdown>
+          <Markdown
+            body={body}
+          />
         </div>
       </div>
     </div>
