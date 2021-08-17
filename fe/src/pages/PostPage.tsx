@@ -4,6 +4,7 @@ import { useState } from "react";
 import { createRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
+import rehypeRaw from "rehype-raw";
 
 
 import "./PostPage.scss";
@@ -82,7 +83,7 @@ export const PostPage: React.FC = () => {
           rows={40}
         ></textarea>
         <div className="rendered">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
+        <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
         </div>
       </div>
     </div>

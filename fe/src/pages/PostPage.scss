@@ -4,14 +4,18 @@
   }
 
   .split-view {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    column-gap: 20px;
-    margin: 20px;
+    display: flex;
+  }
+
+  .post-page__body {
+    margin: 0 10px;
+    width: 50%;
   }
 
   .rendered {
     white-space: break-spaces;
+    margin: 0 10px;
+    width: 50%;
 
     img {
       width: 100%;
