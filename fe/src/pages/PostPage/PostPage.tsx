@@ -10,13 +10,9 @@ import { Markdown } from '../../components/Markdown';
 
 export const PostPage: React.FC = () => {
   const textAreaRef = createRef<HTMLTextAreaElement>();
+  const titleRef = createRef<HTMLDivElement>();
 
-  const post = {
-    title: "Hello World",
-    body: "This is my first post",
-  };
-
-  const [body, setBody] = useState(post.body);
+  const [body, setBody] = useState("");
 
   useEffect(() => {
     const textArea = textAreaRef.current;
@@ -71,12 +67,24 @@ export const PostPage: React.FC = () => {
     return jsonData.data;
   }
 
+  async function handleSavePressed() {
+    const res = await fetch("/api/posts", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: titleRef.current?.innerText,
+        body
+      }),
+    });
+  }
+
   return (
     <div className="post-page">
       <div className="container">
-        <h1 className="text-center" contentEditable suppressContentEditableWarning>
-          {post.title}
-        </h1>
+        <h1 ref={titleRef} contentEditable suppressContentEditableWarning></h1>
+        <button className="text-right" onClick={handleSavePressed}>Save</button>
       </div>
       <div className="split-view">
         <textarea

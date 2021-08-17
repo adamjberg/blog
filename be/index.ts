@@ -15,8 +15,6 @@ async function run() {
     ? process.env.DB_URI
     : "mongodb://localhost:27017/blog";
 
-    console.log(dbUri)
-
   await mongoose.connect(dbUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

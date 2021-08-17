@@ -22,4 +22,4 @@ const PostSchema = new Schema(
   }
 );
 
-export const Post: Model<PostType> = model<PostType>("Album", PostSchema);
+export const Post: Model<PostType> = model<PostType>("Post", PostSchema);
