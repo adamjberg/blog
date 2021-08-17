@@ -71,7 +71,7 @@ export const PostPage: React.FC = () => {
   return (
     <div className="post-page">
       <div className="container">
-        <h1>{post.title}</h1>
+        <h1 className="text-center" contentEditable>{post.title}</h1>
       </div>
       <div className="split-view">
         <textarea
